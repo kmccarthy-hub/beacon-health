@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <script>
+    (() => {
+      const saved = localStorage.getItem("beacon-theme");
+      document.documentElement.classList.toggle("light", saved !== "dark");
+    })();
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Beacon carries therapist-led care into everyday life with private check-ins, useful insights and support between appointments.">
+
+  <meta property="og:title" content="Beacon Health — Your care, carried into everyday life">
+  <meta property="og:description" content="Private check-ins, useful insights and support between appointments—not an AI therapist.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="">
+  <!-- Add a 1200 × 630 image URL before publishing:
+  <meta property="og:image" content="">
+  -->
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Beacon Health — Your care, carried into everyday life">
+  <meta name="twitter:description" content="Private check-ins, useful insights and support between appointments—not an AI therapist.">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='86'>🫶</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <title>Beacon Health — Your care, carried into everyday life</title>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #071714;
+      --bg-soft: #0d211d;
+      --surface: rgba(18, 43, 37, 0.76);
+      --surface-solid: #122b25;
+      --surface-muted: rgba(255, 255, 255, 0.045);
+      --text: #f1f7f3;
+      --muted: #aac0b7;
+      --line: rgba(210, 239, 226, 0.13);
+      --primary: #75d4b0;
+      --primary-strong: #9be5c9;
+      --primary-ink: #062019;
+      --amber: #e5b96f;
+      --amber-soft: rgba(229, 185, 111, 0.12);
+      --danger: #ff938f;
+      --danger-soft: rgba(255, 147, 143, 0.12);
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+      --header: rgba(7, 23, 20, 0.7);
+      --grid: rgba(255, 255, 255, 0.03);
+      --orb-one: rgba(77, 196, 156, 0.24);
+      --orb-two: rgba(229, 185, 111, 0.18);
+      --focus: #d8ad62;
+    }
+
+    html.light {
+      color-scheme: light;
+      --bg: #f7f3e9;
+      --bg-soft: #edf4ed;
+      --surface: rgba(255, 253, 247, 0.78);
+      --surface-solid: #fffdf7;
+      --surface-muted: rgba(30, 78, 65, 0.045);
+      --text: #17362e;
+      --muted: #587068;
+      --line: rgba(25, 75, 62, 0.13);
+      --primary: #267f69;
+      --primary-strong: #176651;
+      --primary-ink: #ffffff;
+      --amber: #aa6f19;
+      --amber-soft: rgba(196, 133, 39, 0.1);
+      --danger: #a43e3a;
+      --danger-soft: rgba(164, 62, 58, 0.09);
+      --shadow: 0 24px 70px rgba(46, 75, 65, 0.11);
+      --header: rgba(247, 243, 233, 0.72);
+      --grid: rgba(23, 54, 46, 0.035);
+      --orb-one: rgba(63, 166, 130, 0.18);
+      --orb-two: rgba(224, 171, 82, 0.17);
+      --focus: #8a5a13;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      background:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+        linear-gradient(150deg, var(--bg), var(--bg-soft));
+      background-size: 60px 60px, 60px 60px, auto;
+      color: var(--text);
+      font: 400 16px/1.65 Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body::before,
+    body::after {
+      position: fixed;
+      z-index: -1;
+      width: 430px;
+      height: 430px;
+      border-radius: 50%;
+      content: "";
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    body::before {
+      top: 7%;
+      left: calc(50% - 760px);
+      background: var(--orb-one);
+      animation: orbit-one 16s ease-in-out infinite alternate;
+    }
+
+    body::after {
+      right: calc(50% - 760px);
+      bottom: 4%;
+      background: var(--orb-two);
+      animation: orbit-two 19s ease-in-out infinite alternate;
+    }
+
+    @keyframes orbit-one {
+      to { transform: translate(80px, 90px) scale(1.12); }
+    }
+
+    @keyframes orbit-two {
+      to { transform: translate(-90px, -70px) scale(0.9); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    .container {
+      width: min(880px, calc(100% - 36px));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      border-bottom: 1px solid var(--line);
+      background: var(--header);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .nav {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--text);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 35px;
+      height: 35px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--surface);
+      box-shadow: 0 0 28px var(--orb-one);
+      color: var(--primary);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .theme-toggle {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .moon {
+      display: none;
+    }
+
+    html.light .sun {
+      display: none;
+    }
+
+    html.light .moon {
+      display: inline;
+    }
+
+    .nav-cta {
+      padding: 9px 15px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--text);
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    main {
+      padding-bottom: 70px;
+    }
+
+    section {
+      scroll-margin-top: 92px;
+    }
+
+    .hero {
+      padding: 112px 0 88px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin-right: auto;
+      margin-bottom: 24px;
+      margin-left: auto;
+      font-size: clamp(2.7rem, 8vw, 5.25rem);
+      line-height: 0.98;
+      letter-spacing: -0.065em;
+    }
+
+    h2 {
+      margin-bottom: 16px;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.06;
+      letter-spacing: -0.055em;
+    }
+
+    h3 {
+      margin-bottom: 9px;
+      font-size: 1.08rem;
+      line-height: 1.35;
+      letter-spacing: -0.025em;
+    }
+
+    .hero-copy,
+    .section-intro {
+      max-width: 680px;
+      margin-right: auto;
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .hero-actions {
+      margin-top: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .button {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 20px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      background: var(--primary);
+      color: var(--primary-ink);
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 160ms ease, background 160ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      background: var(--primary-strong);
+    }
+
+    .button.secondary {
+      border-color: var(--line);
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .trust-line {
+      margin-top: 19px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .section {
+      padding: 70px 0;
+    }
+
+    .section-heading {
+      margin-bottom: 34px;
+      text-align: center;
+    }
+
+    .card,
+    .experience,
+    .proof,
+    .faq-list,
+    .qualifier-shell {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .reasons-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .card {
+      padding: 25px;
+      border-radius: 22px;
+    }
+
+    .reason-number {
+      width: 34px;
+      height: 34px;
+      margin-bottom: 20px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--amber-soft);
+      color: var(--amber);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .card p,
+    .experience-step p,
+    .result-copy {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .experience {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(25px, 5vw, 42px);
+      border-radius: 28px;
+    }
+
+    .experience::before {
+      position: absolute;
+      top: 48px;
+      bottom: 48px;
+      left: 58px;
+      width: 2px;
+      background: linear-gradient(var(--primary), var(--amber));
+      box-shadow: 0 0 18px var(--primary);
+      content: "";
+    }
+
+    .experience-list {
+      position: relative;
+      display: grid;
+      gap: 16px;
+    }
+
+    .experience-step {
+      position: relative;
+      min-height: 86px;
+      margin-left: 58px;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--surface-solid);
+    }
+
+    .experience-step::before {
+      position: absolute;
+      top: 25px;
+      left: -42px;
+      width: 13px;
+      height: 13px;
+      border: 4px solid var(--surface-solid);
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 15px var(--primary);
+      content: "";
+    }
+
+    .safety-note {
+      margin-top: 22px;
+      padding: 15px 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--amber-soft);
+      color: var(--text);
+      font-size: 0.92rem;
+    }
+
+    .proof {
+      padding: clamp(25px, 5vw, 42px);
+      border-radius: 28px;
+    }
+
+    .quotes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    blockquote {
+      margin: 0;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--surface-muted);
+    }
+
+    blockquote p {
+      margin-bottom: 18px;
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    blockquote cite {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-style: normal;
+    }
+
+    .proof-close {
+      max-width: 700px;
+      margin: 28px auto 0;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .faq-list {
+      overflow: hidden;
+      border-radius: 24px;
+    }
+
+    details {
+      border-bottom: 1px solid var(--line);
+    }
+
+    details:last-child {
+      border-bottom: 0;
+    }
+
+    summary {
+      position: relative;
+      padding: 21px 58px 21px 24px;
+      color: var(--text);
+      font-weight: 700;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      position: absolute;
+      top: 50%;
+      right: 24px;
+      color: var(--primary);
+      font-size: 1.25rem;
+      content: "+";
+      transform: translateY(-50%);
+    }
+
+    details[open] summary::after {
+      content: "−";
+    }
+
+    details p {
+      max-width: 740px;
+      padding: 0 24px 22px;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .qualifier-shell {
+      min-height: 480px;
+      padding: clamp(25px, 6vw, 48px);
+      border-radius: 30px;
+    }
+
+    .qualifier-header {
+      margin-bottom: 31px;
+      text-align: center;
+    }
+
+    .progress-row {
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .progress-track {
+      height: 8px;
+      flex: 1;
+      overflow: hidden;
+      border-radius: 999px;
+      background: var(--surface-muted);
+    }
+
+    .progress-bar {
+      width: 20%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--primary), var(--amber));
+      transition: width 250ms ease;
+    }
+
+    .progress-label {
+      min-width: 104px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .question-title {
+      max-width: 670px;
+      margin-bottom: 24px;
+      font-size: clamp(1.45rem, 4vw, 2rem);
+      line-height: 1.25;
+      letter-spacing: -0.04em;
+    }
+
+    .options {
+      display: grid;
+      gap: 11px;
+    }
+
+    .option {
+      width: 100%;
+      padding: 17px 19px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--surface-muted);
+      color: var(--text);
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+    }
+
+    .option:hover {
+      border-color: var(--primary);
+      background: var(--surface-solid);
+      transform: translateX(3px);
+    }
+
+    .question-actions {
+      min-height: 44px;
+      margin-top: 22px;
+    }
+
+    .back-button,
+    .restart-button {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font-weight: 700;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .result {
+      text-align: center;
+    }
+
+    .result-badge {
+      width: fit-content;
+      margin: 0 auto 22px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--amber-soft);
+      color: var(--amber);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .result.crisis .result-badge {
+      background: var(--danger-soft);
+      color: var(--danger);
+    }
+
+    .result-copy {
+      max-width: 620px;
+      margin-right: auto;
+      margin-bottom: 28px;
+      margin-left: auto;
+      font-size: 1.05rem;
+    }
+
+    .result-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    footer {
+      padding: 31px 0 45px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-row p {
+      margin: 0;
+    }
+
+    @media (max-width: 740px) {
+      .reasons-grid,
+      .quotes {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 82px 0 64px;
+      }
+
+      .section {
+        padding: 54px 0;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .experience::before {
+        left: 36px;
+      }
+
+      .experience-step {
+        margin-left: 36px;
+      }
+
+      .experience-step::before {
+        left: -30px;
+      }
+
+      .footer-row {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        width: min(100% - 24px, 880px);
+      }
+
+      h1 {
+        font-size: 2.75rem;
+      }
+
+      .hero-actions,
+      .hero-actions .button,
+      .result-actions,
+      .result-actions .button {
+        width: 100%;
+      }
+
+      .progress-row {
+        align-items: flex-start;
+        flex-direction: column-reverse;
+        gap: 9px;
+      }
+
+      .progress-track {
+        width: 100%;
+        flex: none;
+      }
+
+      .progress-label {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Beacon Health home">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        Beacon Health
+      </a>
+
+      <div class="nav-actions">
+        <a class="nav-cta" href="#qualifier">Is this for you?</a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme">
+          <span class="sun" aria-hidden="true">☀</span>
+          <span class="moon" aria-hidden="true">☾</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow">Human-led care. AI-supported continuity.</p>
+        <h1>Your care, carried into everyday life.</h1>
+        <p class="hero-copy">
+          Reflect, recognise patterns and practise what you discussed in therapy—with clear limits and control over what your therapist sees.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button" href="#experience">See how Beacon supports you</a>
+        </div>
+
+        <p class="trust-line">Support between appointments—not an AI therapist.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="reasons-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Care should not stop when the session ends</p>
+          <h2 id="reasons-title">Support built around real life</h2>
+        </div>
+
+        <div class="reasons-grid">
+          <article class="card">
+            <span class="reason-number">01</span>
+            <h3>Support in the moment</h3>
+            <p>Use a short check-in when thoughts or emotions arise instead of waiting for your next appointment.</p>
+          </article>
+
+          <article class="card">
+            <span class="reason-number">02</span>
+            <h3>Patterns you can act on</h3>
+            <p>Connect mood, sleep, habits and daily events without presenting correlations as diagnoses.</p>
+          </article>
+
+          <article class="card">
+            <span class="reason-number">03</span>
+            <h3>You control the connection</h3>
+            <p>Review and approve anything before it becomes part of a therapist-ready summary.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience" aria-labelledby="experience-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">A sample experience</p>
+          <h2 id="experience-title">A difficult Tuesday, with support that remembers the plan</h2>
+        </div>
+
+        <div class="experience">
+          <div class="experience-list">
+            <article class="experience-step">
+              <h3>1. Check in</h3>
+              <p>“I’m overwhelmed and avoiding an important conversation.”</p>
+            </article>
+
+            <article class="experience-step">
+              <h3>2. Receive a bounded next step</h3>
+              <p>Beacon recalls the therapist-approved goal of pausing before avoidance and offers a brief reflection or grounding exercise.</p>
+            </article>
+
+            <article class="experience-step">
+              <h3>3. Notice a pattern</h3>
+              <p>The patient sees that similar moments often follow poor sleep and work pressure—an observation, not a diagnosis.</p>
+            </article>
+
+            <article class="experience-step">
+              <h3>4. Prepare for therapy</h3>
+              <p>Beacon drafts: “Avoidance increased on three high-pressure days. The breathing exercise helped twice.”</p>
+            </article>
+
+            <article class="experience-step">
+              <h3>5. Stay in control</h3>
+              <p>The patient edits, approves or deletes the summary before sharing it.</p>
+            </article>
+          </div>
+
+          <div class="safety-note">
+            <strong>Beacon supports reflection and wellbeing.</strong>
+            It does not diagnose, replace therapy or provide emergency care.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="proof-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">The unmet need</p>
+          <h2 id="proof-title">Why support between sessions matters</h2>
+        </div>
+
+        <div class="proof">
+          <div class="quotes">
+            <blockquote>
+              <p>“It’s 3am. I can’t call my therapist. I don’t want to bother my friend.”</p>
+              <cite>AI-support user quoted by the New York Post</cite>
+            </blockquote>
+
+            <blockquote>
+              <p>“Rather than pay for another session, I’d go on ChatGPT.”</p>
+              <cite>Therapy and AI user quoted by Le Monde</cite>
+            </blockquote>
+
+            <blockquote>
+              <p>“Your personal, private mental health struggles were being monetised.”</p>
+              <cite>Jen Caltrider, Mozilla consumer-privacy researcher</cite>
+            </blockquote>
+          </div>
+
+          <p class="proof-close">
+            Patients already seek immediate, affordable support. Beacon’s opportunity is to provide it with human connection, clinical boundaries and meaningful privacy controls.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Clear boundaries</p>
+          <h2 id="faq-title">Questions you should ask</h2>
+        </div>
+
+        <div class="faq-list">
+          <details>
+            <summary>Is Beacon replacing my therapist?</summary>
+            <p>No. Beacon supports reflection, exercises and preparation between appointments. Your therapist remains responsible for your care.</p>
+          </details>
+
+          <details>
+            <summary>Will everything I enter be shared?</summary>
+            <p>No. Nothing enters a therapist summary without you choosing to include it. You remain in control.</p>
+          </details>
+
+          <details>
+            <summary>Does Beacon diagnose me from my mood or behaviour?</summary>
+            <p>No. Beacon may show possible patterns, but it labels them as observations rather than diagnoses or clinical conclusions.</p>
+          </details>
+
+          <details>
+            <summary>What happens if I need urgent help?</summary>
+            <p>Beacon stops the normal experience and directs you toward immediate human and crisis-support options.</p>
+          </details>
+
+          <details>
+            <summary>Why not use a general-purpose chatbot?</summary>
+            <p>Beacon is designed around bounded support, patient control and continuity with qualified human care—not unrestricted conversation.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="qualifier" aria-labelledby="qualifier-title">
+      <div class="container">
+        <div class="qualifier-shell">
+          <div class="qualifier-header">
+            <p class="eyebrow">Is this for you?</p>
+            <h2 id="qualifier-title">What kind of support would help between appointments?</h2>
+            <p class="section-intro">Answer five questions to find the most appropriate Beacon pathway.</p>
+          </div>
+
+          <div id="quiz" aria-live="polite">
+            <div class="progress-row">
+              <div class="progress-track" aria-hidden="true">
+                <div class="progress-bar" id="progress-bar"></div>
+              </div>
+              <span class="progress-label" id="progress-label">Question 1 of 5</span>
+            </div>
+
+            <div id="question-container"></div>
+
+            <div class="question-actions">
+              <button class="back-button" id="back-button" type="button" hidden>Previous question</button>
+            </div>
+          </div>
+
+          <div id="result" class="result" hidden aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <p><strong>Beacon Health</strong> — Your care, carried into everyday life.</p>
+      <p>Support between appointments—not an AI therapist.</p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById("theme-toggle");
+
+    function updateThemeLabel() {
+      const isLight = document.documentElement.classList.contains("light");
+      themeToggle.setAttribute(
+        "aria-label",
+        isLight ? "Switch to dark theme" : "Switch to light theme"
+      );
+    }
+
+    updateThemeLabel();
+
+    themeToggle.addEventListener("click", () => {
+      const isLight = document.documentElement.classList.toggle("light");
+      localStorage.setItem("beacon-theme", isLight ? "light" : "dark");
+      updateThemeLabel();
+    });
+
+    const questions = [
+      {
+        title: "How often do difficult moments arise between your appointments?",
+        options: [
+          { label: "Rarely", score: 0 },
+          { label: "Some weeks", score: 1 },
+          { label: "Several times most weeks", score: 2 }
+        ]
+      },
+      {
+        title: "What do you currently do when that happens?",
+        options: [
+          { label: "I already have a routine that works", score: 0 },
+          { label: "I journal, use an app or wait for the feeling to pass", score: 1 },
+          { label: "I do not have reliable support in the moment", score: 2 }
+        ]
+      },
+      {
+        title: "What would be most useful from Beacon?",
+        options: [
+          { label: "Reminders and short reflection exercises", score: 1 },
+          { label: "Help recognising patterns and preparing for therapy", score: 2 },
+          { label: "I may need urgent or crisis support", score: 0, override: true }
+        ]
+      },
+      {
+        title: "How would you feel about bringing Beacon insights into therapy?",
+        options: [
+          { label: "I would rather keep them separate", score: 0 },
+          { label: "I might share them after reviewing everything", score: 1 },
+          { label: "I would value an approved summary for my therapist", score: 2 }
+        ]
+      },
+      {
+        title: "How do you feel about AI supporting—not replacing—human care?",
+        options: [
+          { label: "I prefer support directly from people", score: 0 },
+          { label: "I am cautious but open if I remain in control", score: 1 },
+          { label: "I am comfortable when the limits and privacy controls are clear", score: 2 }
+        ]
+      }
+    ];
+
+    const pathways = {
+      human: {
+        badge: "Human-First Path",
+        headline: "Keep your next step human-led",
+        copy: "Beacon’s AI continuity tools may not be the right starting point for you. Direct contact with qualified people offers the clearest path, especially when support feels urgent or you prefer not to use AI.",
+        cta: "View human support options"
+      },
+      guided: {
+        badge: "Guided Insight Path",
+        headline: "Start with insights you control",
+        copy: "A lightweight weekly check-in could help you recognise patterns and prepare for appointments without making Beacon part of every difficult moment. You review everything before sharing.",
+        cta: "Preview a private weekly summary"
+      },
+      daily: {
+        badge: "Daily Continuity Path",
+        headline: "Carry your care plan into each day",
+        copy: "Regular check-ins, therapist-aligned exercises and approved summaries could help you apply therapy when real situations occur—not only when your next session begins.",
+        cta: "Try a two-minute check-in"
+      }
+    };
+
+    const questionContainer = document.getElementById("question-container");
+    const progressBar = document.getElementById("progress-bar");
+    const progressLabel = document.getElementById("progress-label");
+    const backButton = document.getElementById("back-button");
+    const quiz = document.getElementById("quiz");
+    const result = document.getElementById("result");
+
+    let currentQuestion = 0;
+    let answers = [];
+    let crisisOverride = false;
+
+    function renderQuestion() {
+      const question = questions[currentQuestion];
+      const progress = ((currentQuestion + 1) / questions.length) * 100;
+
+      progressBar.style.width = `${progress}%`;
+      progressLabel.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+      backButton.hidden = currentQuestion === 0;
+
+      questionContainer.innerHTML = `
+        <h3 class="question-title">${question.title}</h3>
+        <div class="options">
+          ${question.options.map((option, index) => `
+            <button class="option" type="button" data-index="${index}">
+              ${option.label}
+            </button>
+          `).join("")}
+        </div>
+      `;
+
+      questionContainer.querySelectorAll(".option").forEach(button => {
+        button.addEventListener("click", () => {
+          const selected = question.options[Number(button.dataset.index)];
+          answers[currentQuestion] = selected;
+          crisisOverride = answers.some(answer => answer && answer.override);
+
+          if (currentQuestion < questions.length - 1) {
+            currentQuestion += 1;
+            renderQuestion();
+          } else {
+            showResult();
+          }
+        });
+      });
+    }
+
+    function showResult() {
+      const score = answers.reduce((total, answer) => total + (answer?.score || 0), 0);
+      let pathway;
+
+      if (crisisOverride || score <= 3) {
+        pathway = pathways.human;
+      } else if (score <= 7) {
+        pathway = pathways.guided;
+      } else {
+        pathway = pathways.daily;
+      }
+
+      const copy = crisisOverride
+        ? "This qualifier cannot assess or respond to an emergency. Please use Beacon’s immediate human-support options now."
+        : pathway.copy;
+
+      quiz.hidden = true;
+      result.hidden = false;
+      result.className = crisisOverride ? "result crisis" : "result";
+
+      result.innerHTML = `
+        <p class="result-badge">${pathway.badge}</p>
+        <h2>${pathway.headline}</h2>
+        <p class="result-copy">${copy}</p>
+        <div class="result-actions">
+          <a class="button" href="#faq-title">${pathway.cta}</a>
+          <button class="restart-button" type="button">Retake qualifier</button>
+        </div>
+      `;
+
+      result.querySelector(".restart-button").addEventListener("click", restartQuiz);
+    }
+
+    function restartQuiz() {
+      currentQuestion = 0;
+      answers = [];
+      crisisOverride = false;
+      result.hidden = true;
+      quiz.hidden = false;
+      renderQuestion();
+    }
+
+    backButton.addEventListener("click", () => {
+      if (currentQuestion > 0) {
+        answers.splice(currentQuestion);
+        crisisOverride = answers.some(answer => answer && answer.override);
+        currentQuestion -= 1;
+        renderQuestion();
+      }
+    });
+
+    renderQuestion();
+  </script>
+</body>
+</html>
